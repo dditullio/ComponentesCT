@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <PathDelim Value="\"/>
+    <Name Value="mis_componentes"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="C:\codetyphon\typhon\components\datetimectrls\"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Version Release="1"/>
+    <Files Count="11">
+      <Item1>
+        <Filename Value="mis_componentes.lrs"/>
+        <Type Value="LRS"/>
+      </Item1>
+      <Item2>
+        <Filename Value="controladorgrilla.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="ControladorGrilla"/>
+      </Item2>
+      <Item3>
+        <Filename Value="sqlquerygroup.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="SQLQueryGroup"/>
+      </Item3>
+      <Item4>
+        <Filename Value="zcontroladoredicion.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="zcontroladoredicion"/>
+      </Item4>
+      <Item5>
+        <Filename Value="zdatasetgroup.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="zdatasetgroup"/>
+      </Item5>
+      <Item6>
+        <Filename Value="zcontroladorgrilla.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="zcontroladorgrilla"/>
+      </Item6>
+      <Item7>
+        <Filename Value="controladoredicion.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="ControladorEdicion"/>
+      </Item7>
+      <Item8>
+        <Filename Value="dtdbedit.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="DtDBEdit"/>
+      </Item8>
+      <Item9>
+        <Filename Value="dtdblookupcombobox.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="DtDBLookupComboBox"/>
+      </Item9>
+      <Item10>
+        <Filename Value="dtdbcoordedit.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="dtdbcoordedit"/>
+      </Item10>
+      <Item11>
+        <Filename Value="dtdbtimeedit.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="DtDBTimeEdit"/>
+      </Item11>
+    </Files>
+    <Type Value="RunAndDesignTime"/>
+    <RequiredPkgs Count="4">
+      <Item1>
+        <PackageName Value="pl_lazsolutions"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="pl_rx"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="pl_zeosdbo"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="LCL"/>
+      </Item4>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+    <CustomOptions Items="ExternHelp" Version="2">
+      <_ExternHelp Items="Count"/>
+    </CustomOptions>
+  </Package>
+</CONFIG>
