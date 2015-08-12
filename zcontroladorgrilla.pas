@@ -54,6 +54,7 @@ type
     FExpresionFiltro: string;
     FGrilla: TCustomDBGrid;
     FMostrarBotonExportar: boolean;
+    FSeleccionarUltimo: Boolean;
     FZDataset: TZAbstractDataset;
     FTipoBuscador: TTipoBuscador;
     //Acciones para los botones
@@ -102,6 +103,7 @@ type
     //Por ejemplo: "Nombre=__FILTRO__ OR Descripcion=__FILTRO__"
     procedure SetGrilla(const AValue: TCustomDBGrid);
     procedure SetMostrarBotonExportar(AValue: boolean);
+    procedure SetSeleccionarUltimo(AValue: Boolean);
     procedure SetZDataset(const AValue: TZAbstractDataset);
 
     procedure AgregarExecute(Sender: TObject);
@@ -143,6 +145,7 @@ type
     property BotonCerrar: TBitBtn read FBotonCerrar write SetBotonCerrar;
     property BotonBuscar: TBitBtn read FBotonBuscar write SetBotonBuscar;
     property Buscador: TCustomEdit read FBuscador write SetBuscador;
+    property SeleccionarUltimo: Boolean read FSeleccionarUltimo write SetSeleccionarUltimo;
     property CampoIdPadre: TNumericField read FCampoIdPadre write SetCampoIdPadre;
     property ControlEdicion: TZControladorEdicion
       read FControlEdicion write SetControlEdicion;
@@ -508,6 +511,12 @@ begin
   FacExportar.Visible := AValue;
 end;
 
+procedure TZControladorGrilla.SetSeleccionarUltimo(AValue: Boolean);
+begin
+    if FSeleccionarUltimo=AValue then Exit;
+    FSeleccionarUltimo:=AValue;
+end;
+
 procedure TZControladorGrilla.SetZDataset(const AValue: TZAbstractDataset);
 begin
   if FZDataset = AValue then
@@ -812,6 +821,8 @@ begin
       end;
     end;
   end;
+  if FSeleccionarUltimo then
+     ZDataset.Last;
   // Habilito las acciones que correspondan;
   HabilitarAcciones;
 end;
@@ -887,6 +898,7 @@ begin
   TipoBuscador := tbParametro;
   FMostrarBotonExportar := False;
   FExporting := False;
+  FSeleccionarUltimo:=False;
 
   //Algunas no están implementadas aún
   //*FacAgregar;
