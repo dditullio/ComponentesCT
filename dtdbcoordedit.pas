@@ -47,6 +47,7 @@ end;
 
 procedure TDtDBCoordEdit.DataChange(Sender: TObject);
 begin
+  inherited;
 end;
 
 procedure TDtDBCoordEdit.SetCoordKind(AValue: TCoordKind);
@@ -57,7 +58,6 @@ end;
 
 procedure TDtDBCoordEdit.UpdateControlState(ValueState: boolean);
 begin
-
 end;
 
 procedure TDtDBCoordEdit.UpdateData(Sender: TObject);
@@ -77,7 +77,7 @@ end;
 
 procedure TDtDBCoordEdit.UpdateDisplayText(const NewText: string);
 begin
-
+  inherited;
 end;
 
 procedure TDtDBCoordEdit.KeyDown(var Key: word; Shift: TShiftState);

@@ -299,7 +299,10 @@ begin
   StartTransaction;
   try
     if Assigned(DatasetMaestro) and DatasetMaestro.Active then
+    begin
       DatasetMaestro.ApplyUpdates;
+      DatasetMaestro.CommitUpdates;
+    end;
     for i := 0 to DatasetsComplementarios.Count - 1 do
     begin
       if Assigned(DatasetsComplementarios.Dataset[i]) and
@@ -308,6 +311,7 @@ begin
         (DatasetsComplementarios.Dataset[i].IncludeInUpdate) then
       begin
         DatasetsComplementarios.Dataset[i].Dataset.ApplyUpdates;
+        DatasetsComplementarios.Dataset[i].Dataset.CommitUpdates;
       end;
     end;
     Commit;
