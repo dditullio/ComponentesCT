@@ -3,6 +3,7 @@
   <Package Version="4">
     <PathDelim Value="\"/>
     <Name Value="mis_componentes"/>
+    <Type Value="RunAndDesignTime"/>
     <CompilerOptions>
       <Version Value="11"/>
       <PathDelim Value="\"/>
@@ -68,13 +69,12 @@
         <UnitName Value="DtDBTimeEdit"/>
       </Item11>
     </Files>
-    <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="5">
       <Item1>
-        <PackageName Value="datetimectrls"/>
+        <PackageName Value="pl_solutions"/>
       </Item1>
       <Item2>
-        <PackageName Value="pl_lazsolutions"/>
+        <PackageName Value="lz_datetimectrls"/>
       </Item2>
       <Item3>
         <PackageName Value="pl_rx"/>

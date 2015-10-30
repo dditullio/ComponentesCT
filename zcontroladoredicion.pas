@@ -33,6 +33,7 @@ type
   TDummyControl = class(TWinControl)
     public
       procedure CustomKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
+      procedure CustomClick(Sender: TObject);
   end;
 
   { TZControladorEdicion }
@@ -138,20 +139,55 @@ end;
 
 procedure TDummyControl.CustomKeyDown(Sender: TObject; var Key: word;
   Shift: TShiftState);
+var
+  NewFocus: TWinControl;
+  ParentForm: TCustomForm;
 begin
   if Key = VK_RETURN then
   begin
     Key := VK_TAB;
-  // Ver como hacer para que la flecha arriba vaya un control hacia atrás
   end
   else if ((Sender is TWinControl)  and not ((Sender is TCustomMemo) or (Sender is TCustomGrid) or (Sender is TCustomListBox) or (Sender is TCustomComboBox) or (Sender is TCustomDateTimePicker))) then
   begin
        if (Key = VK_UP) then
-              (Sender as TWinControl).PerformTab(false);
+       begin
+         (Sender as TWinControl).PerformTab(false);
+         //Selecciono el texto
+         ParentForm := GetParentForm(Sender as TWinControl);
+         if ParentForm <> nil then
+         begin
+           NewFocus := ParentForm.ActiveControl;
+           if (NewFocus <> nil) and (NewFocus is TCustomEdit) then
+           begin
+                (NewFocus as TCustomEdit).SelectAll;
+           end;
+         end;
+       end;
        if (Key = VK_DOWN) then
-              (Sender as TWinControl).PerformTab(true);
+       begin
+          (Sender as TWinControl).PerformTab(true);
+          //Selecciono el texto
+          ParentForm := GetParentForm(Sender as TWinControl);
+          if ParentForm <> nil then
+          begin
+            NewFocus := ParentForm.ActiveControl;
+            if (NewFocus <> nil) and (NewFocus is TCustomEdit) then
+            begin
+                 (NewFocus as TCustomEdit).SelectAll;
+            end;
+          end;
+       end;
   end;
   inherited KeyDown(Key, Shift);
+end;
+
+procedure TDummyControl.CustomClick(Sender: TObject);
+begin
+  inherited;
+  if (sender is TCustomEdit) then
+  begin
+     (sender as TCustomEdit).SelectAll;
+  end;
 end;
 
 { TZControladorEdicion }
@@ -336,7 +372,9 @@ begin
       FOldFormActivate(Self);
     //Asigno el comportamiento del KeyDown a los controles del form
     if not (csDesigning in ComponentState) then
+    begin
        AsignarKeyDown(FParentForm);
+    end;
     if (FAccion in [ED_AGREGAR, ED_MODIFICAR]) and Assigned(FControlInicial) and
       (FControlInicial.CanFocus) then
     begin
@@ -425,7 +463,10 @@ begin
         not (Controls[i] is TCustomGrid) then
         AsignarKeyDown(Controls[i] as TWinControl);
       if (Controls[i] is TCustomEdit) then
-      (Controls[i] as TCustomEdit).OnKeyDown := @FDummyControl.CustomKeyDown
+        begin
+             (Controls[i] as TCustomEdit).OnKeyDown := @FDummyControl.CustomKeyDown;
+           //  (Controls[i] as TCustomEdit).OnClick := @FDummyControl.CustomClick;
+        end
       else if (Controls[i] is TCustomComboBox) then
         (Controls[i] as TCustomComboBox).OnKeyDown := @FDummyControl.CustomKeyDown
       else if (Controls[i] is TCustomDateTimePicker) then
