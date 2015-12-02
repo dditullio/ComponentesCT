@@ -17,7 +17,6 @@ type
     FIncludeInClose: boolean;
     FIncludeInOpen: boolean;
     FIncludeInUpdate: boolean;
-    FRepeatCount: cardinal;
     FDataset: TZAbstractDataset;
     function GetNewId: longint;
     procedure SetAutoincGenerator(AValue: boolean);
@@ -136,7 +135,8 @@ end;
 
 function TZDatasetComponent.GetNewId: longint;
 begin
-
+  //Por ahora no tiene funcionalidad. Se prevé usar a futuro
+  Result:=-1;
 end;
 
 procedure TZDatasetComponent.SetAutoincGenerator(AValue: boolean);

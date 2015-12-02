@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, Buttons, LResources, Graphics, DBGrids, StdCtrls,
   DB, ZDataset, ZAbstractDataset, Forms, Controls, LCLType,
   zcontroladoredicion, rxdbgrid, RxDBGridExportSpreadSheet, ActnList,
-  Dialogs, FileUtil;
+  Dialogs, LazFileUtils;
 
 const
 

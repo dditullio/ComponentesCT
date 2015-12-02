@@ -33,7 +33,6 @@ type
   TDummyControl = class(TWinControl)
     public
       procedure CustomKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
-      procedure CustomClick(Sender: TObject);
   end;
 
   { TZControladorEdicion }
@@ -179,15 +178,6 @@ begin
        end;
   end;
   inherited KeyDown(Key, Shift);
-end;
-
-procedure TDummyControl.CustomClick(Sender: TObject);
-begin
-  inherited;
-  if (sender is TCustomEdit) then
-  begin
-     (sender as TCustomEdit).SelectAll;
-  end;
 end;
 
 { TZControladorEdicion }
@@ -465,7 +455,6 @@ begin
       if (Controls[i] is TCustomEdit) then
         begin
              (Controls[i] as TCustomEdit).OnKeyDown := @FDummyControl.CustomKeyDown;
-           //  (Controls[i] as TCustomEdit).OnClick := @FDummyControl.CustomClick;
         end
       else if (Controls[i] is TCustomComboBox) then
         (Controls[i] as TCustomComboBox).OnKeyDown := @FDummyControl.CustomKeyDown
