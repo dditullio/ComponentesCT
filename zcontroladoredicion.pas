@@ -66,6 +66,7 @@ type
     FIdMaestro: LongInt;
     FIdPadre: LongInt;
     FOldFormActivate: TNotifyEvent;
+    FOldFormShow: TNotifyEvent;
     FOnInitRecord: TNotifyEvent;
     FOnValidateForm: TValidateEvent;
     FPanelEdicion: TPanel;
@@ -91,6 +92,7 @@ type
     procedure Notification(AComponent: TComponent;
       Operation: TOperation); override;
     procedure OnFormActivate(Sender: TObject);
+    procedure OnFormShow(Sender: TObject);
     procedure OnFormCloseQuery(Sender: TObject; var CanClose: boolean);
   public
     { Public declarations }
@@ -365,6 +367,26 @@ begin
     begin
        AsignarKeyDown(FParentForm);
     end;
+{ //Lo siguiente se pasa al evento FormShow
+    if (FAccion in [ED_AGREGAR, ED_MODIFICAR]) and Assigned(FControlInicial) and
+      (FControlInicial.CanFocus) then
+    begin
+      FControlInicial.SetFocus;
+    end
+    else if (FAccion = ED_ELIMINAR) and Assigned(FBotonAceptar) and (FBotonAceptar.CanFocus) then
+    begin
+      FBotonAceptar.SetFocus;
+    end;
+}
+  end;
+end;
+
+procedure TZControladorEdicion.OnFormShow(Sender: TObject);
+begin
+  if Assigned(FParentForm) then
+  begin
+    if Assigned (FOldFormShow) then
+      FOldFormShow(Self);
     if (FAccion in [ED_AGREGAR, ED_MODIFICAR]) and Assigned(FControlInicial) and
       (FControlInicial.CanFocus) then
     begin
@@ -534,6 +556,17 @@ procedure TZControladorEdicion.SetControlInicial(AValue: TWinControl);
 begin
   if FControlInicial=AValue then Exit;
   FControlInicial:=AValue;
+  if Assigned(AValue) then
+  begin
+    //Asigno el evento OnShow
+    if Assigned(FParentForm.OnShow) then
+      FOldFormShow:=FParentForm.OnShow;
+    FParentForm.OnShow:=@OnFormShow;
+  end else
+  begin
+    FParentForm.OnShow:=FOldFormShow;
+    FOldFormShow:=Nil;
+  end;
 end;
 
 procedure TZControladorEdicion.SetControlMostrarAccion(AValue: TLabel);
