@@ -186,7 +186,7 @@ begin
   FDataLink := TFieldDataLink(Perform(CM_GETDATALINK, 0, 0));
   FDataLink.OnUpdateData := UpdateData;
   CustomEditMask := True;
-  EditMask := '##:##;1;_';
+  EditMask := '!##:##;1;_';
 end;
 
 end.

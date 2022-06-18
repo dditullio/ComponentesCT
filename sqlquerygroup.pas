@@ -127,7 +127,7 @@ end;
 
 function TSQLQueryComponent.GetNewId: LongInt;
 begin
-
+  Result:=-1;
 end;
 
 procedure TSQLQueryComponent.SetAutoincGenerator(AValue: boolean);

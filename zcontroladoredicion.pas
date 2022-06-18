@@ -556,16 +556,20 @@ procedure TZControladorEdicion.SetControlInicial(AValue: TWinControl);
 begin
   if FControlInicial=AValue then Exit;
   FControlInicial:=AValue;
-  if Assigned(AValue) then
+  if (Assigned(FParentForm)) and not (csDesigning in ComponentState) then
   begin
-    //Asigno el evento OnShow
-    if Assigned(FParentForm.OnShow) then
-      FOldFormShow:=FParentForm.OnShow;
-    FParentForm.OnShow:=@OnFormShow;
-  end else
-  begin
-    FParentForm.OnShow:=FOldFormShow;
-    FOldFormShow:=Nil;
+    if Assigned(AValue) then
+    begin
+      //Asigno el evento OnShow
+      if Assigned(FParentForm.OnShow) and (FParentForm.OnShow<>@OnFormShow) then
+        FOldFormShow:=FParentForm.OnShow;
+      if (not Assigned(FParentForm.OnShow)) or (Assigned(FParentForm.OnShow) and (FParentForm.OnShow<>@OnFormShow)) then
+      FParentForm.OnShow:=@OnFormShow;
+    end else
+    begin
+      FParentForm.OnShow:=FOldFormShow;
+      FOldFormShow:=Nil;
+    end;
   end;
 end;
 
